@@ -14,11 +14,13 @@
 #ifndef _CARMEN_ERA_INTERFACE_H
 #define _CARMEN_ERA_INTERFACE_H
 
-#include "era_messages.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include <carmen/carmen.h>
+#include "era_messages.h"
+
 
 /**
  * \brief Subscribes to arm configuration reporting messages

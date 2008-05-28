@@ -18,15 +18,11 @@ carmen_era_subscribe_arm_config_message(
   );
 }
 
-
-
 void
 carmen_era_unsubscribe_arm_config_message( carmen_handler_t handler )
 {
   carmen_unsubscribe_message( CARMEN_ERA_ARM_CONFIG_NAME, handler );
 }
-
-
 
 void
 carmen_era_define_arm_config_message()
@@ -41,9 +37,9 @@ carmen_era_define_arm_config_message()
   carmen_test_ipc_exit( err, "Could not define", CARMEN_ERA_ARM_CONFIG_NAME );
 }
 
-
 void
-carmen_era_publish_arm_config_message( carmen_era_arm_config_t* config ) {
+carmen_era_publish_arm_config_message( carmen_era_arm_config_t* config )
+{
   IPC_RETURN_TYPE err;
   err = IPC_publishData( CARMEN_ERA_ARM_CONFIG_NAME, config );
   carmen_test_ipc_exit( err, "Could not publish", CARMEN_ERA_ARM_CONFIG_NAME );
