@@ -30,7 +30,8 @@ typedef struct {
   char *host;             //!< The name of the sending host.
 } carmen_era_arm_config_t;
 
-#define CARMEN_ERA_ARM_CONFIG_FMT "{double,double,double,double,double,double,double,string}"
+#define CARMEN_ERA_ARM_CONFIG_NAME  "era_arm_config"
+#define CARMEN_ERA_ARM_CONFIG_FMT   "{double,double,double,double,double,double,double,string}"
 
 #ifdef __cplusplus
 }
