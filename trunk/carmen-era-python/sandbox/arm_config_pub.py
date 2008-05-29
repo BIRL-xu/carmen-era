@@ -1,5 +1,7 @@
 from era_comm import *
 from time import sleep
+from sys import argv
+
 
 p = ArmConfigPublisher()
 
@@ -15,7 +17,7 @@ def read_data( filename ):
   f.close()
   return result
 
-configs   = read_data( "configs.dat"  )
+configs   = read_data( argv[1]  )
 
 
 while True:
