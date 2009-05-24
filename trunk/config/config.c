@@ -97,3 +97,36 @@ void era_config_set(era_config_p dst_config, era_config_p src_config) {
   for (i = 0; i < sizeof(era_config_joint_t)/sizeof(config_t); ++i)
     config_set(&dst_joint_config_a[i], &src_joint_config_a[i]);
 }
+
+const char** era_config_joint_get_string(era_config_p config, const char* key, 
+  const char** values) {
+  config_p joint_config_a = (config_p)&config->joints;
+  int i;
+
+  for (i = 0; i < sizeof(era_config_joint_t)/sizeof(config_t); ++i)
+    values[i] = config_get_string(&joint_config_a[i], key);
+
+  return values;
+}
+
+int* era_config_joint_get_int(era_config_p config, const char* key, 
+  int* values) {
+  config_p joint_config_a = (config_p)&config->joints;
+  int i;
+
+  for (i = 0; i < sizeof(era_config_joint_t)/sizeof(config_t); ++i)
+    values[i] = config_get_int(&joint_config_a[i], key);
+
+  return values;
+}
+
+double* era_config_joint_get_float(era_config_p config, const char* key, 
+  double* values) {
+  config_p joint_config_a = (config_p)&config->joints;
+  int i;
+
+  for (i = 0; i < sizeof(era_config_joint_t)/sizeof(config_t); ++i)
+    values[i] = config_get_float(&joint_config_a[i], key);
+
+  return values;
+}

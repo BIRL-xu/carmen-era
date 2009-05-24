@@ -115,4 +115,40 @@ void era_config_set(
   era_config_p dst_config,
   era_config_p src_config);
 
+/** \brief Retrieve an arm's configuration parameter's string values
+  * \param[in] config The arm configuration to retrieve the string 
+  *   values from.
+  * \param[in] key The key of the string values to be retrieved.
+  * \param[out] values The retrieved string values.
+  * \return The retrieved string values as passed to the function.
+  */
+const char** era_config_joint_get_string(
+  era_config_p config,
+  const char* key,
+  const char** values);
+
+/** \brief Retrieve an arm's configuration parameter's integer value
+  * \param[in] config The arm configuration to retrieve the integer 
+  *   values from.
+  * \param[in] key The key of the integer values to be retrieved.
+  * \param[out] values The retrieved integer values.
+  * \return The retrieved integer values as passed to the function.
+  */
+int* era_config_joint_get_int(
+  era_config_p config,
+  const char* key,
+  int* values);
+
+/** \brief Retrieve an arm's configuration parameter's floating point value
+  * \param[in] config The arm configuration to retrieve the floating point 
+  *   values from.
+  * \param[in] key The key of the floating point values to be retrieved.
+  * \param[out] values The retrieved floating point values.
+  * \return The retrieved floating point values as passed to the function.
+  */
+double* era_config_joint_get_float(
+  era_config_p config,
+  const char* key,
+  double* values);
+
 #endif
