@@ -1,4 +1,4 @@
-CFLAGS += -I../posix/config -fPIC
+CFLAGS += -I../posix/config -I../ -fPIC
 LDFLAGS += -L../posix/config -lconfig
 
 PREFIX = /usr/local

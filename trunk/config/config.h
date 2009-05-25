@@ -127,7 +127,7 @@ const char** era_config_joint_get_string(
   const char* key,
   const char** values);
 
-/** \brief Retrieve an arm's configuration parameter's integer value
+/** \brief Retrieve an arm's configuration parameter's integer values
   * \param[in] config The arm configuration to retrieve the integer 
   *   values from.
   * \param[in] key The key of the integer values to be retrieved.
@@ -139,7 +139,7 @@ int* era_config_joint_get_int(
   const char* key,
   int* values);
 
-/** \brief Retrieve an arm's configuration parameter's floating point value
+/** \brief Retrieve an arm's configuration parameter's floating point values
   * \param[in] config The arm configuration to retrieve the floating point 
   *   values from.
   * \param[in] key The key of the floating point values to be retrieved.
@@ -147,6 +147,18 @@ int* era_config_joint_get_int(
   * \return The retrieved floating point values as passed to the function.
   */
 double* era_config_joint_get_float(
+  era_config_p config,
+  const char* key,
+  double* values);
+
+/** \brief Retrieve an arm's configuration parameter's radian space values
+  * \param[in] config The arm configuration to retrieve the radian space
+  *   values from.
+  * \param[in] key The key of the radian space values to be retrieved.
+  * \param[out] values The retrieved radian space values.
+  * \return The retrieved radian space values as passed to the function.
+  */
+double* era_config_joint_get_rad(
   era_config_p config,
   const char* key,
   double* values);

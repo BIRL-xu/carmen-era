@@ -20,6 +20,8 @@
 
 #include <string.h>
 
+#include <base/global.h>
+
 #include "config.h"
 
 const char* era_config_joint_prefixes[] = {
@@ -127,6 +129,17 @@ double* era_config_joint_get_float(era_config_p config, const char* key,
 
   for (i = 0; i < sizeof(era_config_joint_t)/sizeof(config_t); ++i)
     values[i] = config_get_float(&joint_config_a[i], key);
+
+  return values;
+}
+
+double* era_config_joint_get_rad(era_config_p config, const char* key,
+  double* values) {
+  config_p joint_config_a = (config_p)&config->joints;
+  int i;
+
+  for (i = 0; i < sizeof(era_config_joint_t)/sizeof(config_t); ++i)
+    values[i] = deg_to_rad(config_get_float(&joint_config_a[i], key));
 
   return values;
 }
