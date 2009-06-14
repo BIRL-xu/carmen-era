@@ -18,41 +18,20 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef _CARMEN_ERA_MESSAGES_H
-#define _CARMEN_ERA_MESSAGES_H
+#include <carmen/carmen.h>
 
-/** @addtogroup era **/
-// @{
+#include "era_ipc.h"
 
-/** \brief BlueBotics ERA-5/1 CARMEN messages
-  * This file specifies the messages for the BlueBotics ERA-5/1.
-  **/
+int carmen_era_ipc_initialize(int argc, char *argv[]) {
+  IPC_RETURN_TYPE err;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+  carmen_ipc_initialize(argc, argv);
+  carmen_param_check_version(argv[0]);
 
-/** \brief Joint configuration space state message 
-  */
-typedef struct {
-  double shoulder_yaw;    //!< The shoulder's yaw angle in [rad].
-  double shoulder_roll;   //!< The shoulder's roll angle in [rad].
-  double shoulder_pitch;  //!< The shoulder's pitch angle in [rad].
-  double elbow_pitch;     //!< The elbow's pitch angle in [rad].
-  double tool_roll;       //!< The tool's roll angle in [rad].
-  double tool_opening;    //!< The tool's opening angle in [rad].
+  err = IPC_defineMsg(CARMEN_ERA_JOINT_STATE_MESSAGE_NAME, IPC_VARIABLE_LENGTH,
+    CARMEN_ERA_JOINT_STATE_MESSAGE_FMT);
+  carmen_test_ipc_exit(err, "Could not define message",
+    CARMEN_ERA_JOINT_STATE_MESSAGE_NAME);
 
-  double timestamp;       //!< The message timestamp in [s].
-  char *host;             //!< The name of the sending host.
-} carmen_era_joint_state_message;
-
-#define CARMEN_ERA_JOINT_STATE_MESSAGE_NAME "era_joint_state_message"
-#define CARMEN_ERA_JOINT_STATE_MESSAGE_FMT "{double,double,double,double,double,double,double,string}"
-
-#ifdef __cplusplus
+  return 0;
 }
-#endif
-
-#endif
-
-// @}

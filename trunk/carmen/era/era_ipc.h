@@ -18,36 +18,25 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef _CARMEN_ERA_MESSAGES_H
-#define _CARMEN_ERA_MESSAGES_H
+#ifndef CARMEN_ERA_IPC_H
+#define CARMEN_ERA_IPC_H
 
 /** @addtogroup era **/
 // @{
 
-/** \brief BlueBotics ERA-5/1 CARMEN messages
-  * This file specifies the messages for the BlueBotics ERA-5/1.
+/** \brief Definition of the communication of this module.
+  * This file specifies the IPC functions of this module.
   **/
+
+#include "era_messages.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/** \brief Joint configuration space state message 
-  */
-typedef struct {
-  double shoulder_yaw;    //!< The shoulder's yaw angle in [rad].
-  double shoulder_roll;   //!< The shoulder's roll angle in [rad].
-  double shoulder_pitch;  //!< The shoulder's pitch angle in [rad].
-  double elbow_pitch;     //!< The elbow's pitch angle in [rad].
-  double tool_roll;       //!< The tool's roll angle in [rad].
-  double tool_opening;    //!< The tool's opening angle in [rad].
-
-  double timestamp;       //!< The message timestamp in [s].
-  char *host;             //!< The name of the sending host.
-} carmen_era_joint_state_message;
-
-#define CARMEN_ERA_JOINT_STATE_MESSAGE_NAME "era_joint_state_message"
-#define CARMEN_ERA_JOINT_STATE_MESSAGE_FMT "{double,double,double,double,double,double,double,string}"
+int carmen_era_ipc_initialize(
+  int argc, 
+  char *argv[]);
 
 #ifdef __cplusplus
 }

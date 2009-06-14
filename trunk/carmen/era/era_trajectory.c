@@ -1,46 +1,108 @@
-/*      Utility program for ERA trajectory control
- *
- *      Ralf Kaestner    ralf.kaestner@gmail.com
- *      Last change:     19.5.2008
- */
+/***************************************************************************
+ *   Copyright (C) 2009 by Ralf Kaestner                                   *
+ *   ralf.kaestner@gmail.com                                               *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ ***************************************************************************/
 
-#include <era.h>
+#include <signal.h>
+
+#include <control/closed_loop.h>
+
 #include "era_interface.h"
 
-#define ERA_ESCAPE 0x1B
+char* era_usb_dev;
+double era_control_freq;
 
-#define ERA_CURSOR_FORWARD 'C'
-#define ERA_CURSOR_BACKWARD 'D'
-#define ERA_CURSOR_UP 'A'
-#define ERA_CURSOR_DOWN 'B'
+thread_t control_thread;
+int carmen_era_quit = 0;
 
-void send_message(
-  const era_arm_configuration_t* configuration,
-  const era_arm_velocity_t* velocity,
-  double actual_frequency) {
-//   era_print_configuration(stdout, configuration, velocity);
-
-//   fprintf(stdout, "%s %5.1f Hz\n", "UPDATE FREQUENCY", actual_frequency);
-//   fprintf(stdout, "%c[%d%c\r", ERA_ESCAPE, 8, ERA_CURSOR_UP);
-
-  carmen_era_arm_config_t message = {
-    configuration->shoulder_yaw,
-    configuration->shoulder_roll,
-    configuration->shoulder_pitch,
-    configuration->ellbow_pitch,
-    configuration->tool_roll,
-    configuration->tool_opening
+void carmen_era_read_parameters(int argc, char **argv) {
+  int num_params;
+  
+  carmen_param_t param_list[] = {
+    {"era", "usb_dev", CARMEN_PARAM_STRING, &era_usb_dev, 0, NULL},
+    {"era", "control_freq", CARMEN_PARAM_DOUBLE, &era_control_freq, 0, NULL}
   };
-  carmen_era_publish_arm_config_message( &message );
+  
+  num_params = sizeof(param_list)/sizeof(param_list[0]);
+  carmen_param_install_params(argc, argv, param_list, num_params);
+}
+
+void carmen_era_signaled(int signal) {
+  if (signal == SIGINT)
+    carmen_era_quit = 1;
 }
 
 int main(int argc, char **argv) {
-  if (argc < 2 || argc > 3) {
-    fprintf(stderr, "Usage: %s DEV [FILE]\n", argv[0]);
+  if (argc < 2) {
+    fprintf(stderr, "Usage: %s FILE\n", argv[0]);
+    return -1;
+  }
+  const char* file = argv[1];
+  carmen_era_read_parameters(argc, argv);
+
+  int result;
+  thread_mutex_t mutex;
+  era_arm_t arm;
+  era_trajectory_t trajectory;
+  thread_mutex_init(&mutex);
+
+  config_t can_config;
+  config_init(&can_config);
+  config_set_string(&can_config, "usb-dev", era_usb_dev);
+
+  can_device_p can_dev = malloc(sizeof(can_device_t));
+  can_init(can_dev, &can_config);
+
+  config_destroy(&can_config);
+    
+  era_config_t era_config;
+  era_config_init(&era_config);
+
+  era_init(&arm, can_dev, &era_config);
+
+  era_config_destroy(&era_config);
+
+  if ((result = era_trajectory_read(file, &trajectory)) < 0) {
+    fprintf(stderr, "%s\n", era_trajectory_errors[-result]);
     return -1;
   }
 
-  era_motors_init(argv[1]);
+  signal(SIGINT, carmen_era_signaled);
+
+  if (era_open(&arm))
+    return -1;
+  if (!(result = era_control_closed_loop_start(&control_thread, &arm, 
+    &mutex, &trajectory, era_control_freq)))
+    thread_wait_exit(&control_thread);
+  else
+    fprintf(stderr, "%s\n", era_control_closed_loop_errors[result]);
+  era_close(&arm);
+
+  era_destroy(&arm);
+  thread_mutex_destroy(&mutex);
+  return 0;
+
+
+
+
+
+
+/*  era_motors_init(argv[1]);
 
   era_arm_configuration_t* trajectory;
   double* timestamps;
@@ -67,5 +129,5 @@ int main(int argc, char **argv) {
   }
 
   era_motors_close();
-  return 0;
+  return 0;*/
 }
