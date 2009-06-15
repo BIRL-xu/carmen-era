@@ -18,8 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef _CARMEN_ERA_INTERFACE_H
-#define _CARMEN_ERA_INTERFACE_H
+#ifndef CARMEN_ERA_INTERFACE_H
+#define CARMEN_ERA_INTERFACE_H
 
 /** @addtogroup era **/
 // @{
@@ -38,22 +38,61 @@ extern "C" {
 
 #include "era_messages.h"
 
-/** \brief Subscribes to joint state configuration reporting messages
+/** \brief Subscribes to joint state messages
  */
 void carmen_era_subscribe_joint_state_message(
   carmen_era_joint_state_message* joint_state,
   carmen_handler_t handler,
   carmen_subscribe_t subscribe_how);
 
-/** \brief Unsubscribes from joint state configuration reporting messages
+/** \brief Unsubscribes from joint state messages
  */
 void carmen_era_unsubscribe_joint_state_message(
   carmen_handler_t handler);
 
-/** \brief Publish joint state configuration reporting messages
+/** \brief Publish joint state messages
  */
 void carmen_era_publish_joint_state(
   era_joint_state_p joint_state,
+  double timestamp);
+
+
+/** \brief Subscribes to velocity state messages
+ */
+void carmen_era_subscribe_velocity_state_message(
+  carmen_era_velocity_state_message* vel_state,
+  carmen_handler_t handler,
+  carmen_subscribe_t subscribe_how);
+
+/** \brief Unsubscribes from velocity state messages
+ */
+void carmen_era_unsubscribe_velocity_state_message(
+  carmen_handler_t handler);
+
+/** \brief Publish velocity state messages
+ */
+void carmen_era_publish_velocity_state(
+  era_velocity_state_p vel_state,
+  double timestamp);
+
+
+/** \brief Subscribes to joint command messages
+ */
+void carmen_era_subscribe_joint_cmd_message(
+  carmen_era_joint_cmd_message* joint_cmd,
+  carmen_handler_t handler,
+  carmen_subscribe_t subscribe_how);
+
+/** \brief Unsubscribes from joint command messages
+ */
+void carmen_era_unsubscribe_joint_cmd_message(
+  carmen_handler_t handler);
+
+/** \brief Publish joint command messages
+ */
+void carmen_era_publish_joint_cmd(
+  era_joint_state_p joint_state,
+  double vel_factor,
   double timestamp);
 
 #ifdef __cplusplus

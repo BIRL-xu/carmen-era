@@ -18,30 +18,35 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <carmen/carmen.h>
+#ifndef CARMEN_ERA_PARAMS_H
+#define CARMEN_ERA_PARAMS_H
 
-#include "era_ipc.h"
+/** @addtogroup era **/
+// @{
 
-int carmen_era_ipc_initialize(int argc, char *argv[]) {
-  IPC_RETURN_TYPE err;
+/** \brief Definition of the parameters of this module.
+  * This file specifies the parameters of this module.
+  **/
 
-  carmen_ipc_initialize(argc, argv);
-  carmen_param_check_version(argv[0]);
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-  err = IPC_defineMsg(CARMEN_ERA_JOINT_STATE_MESSAGE_NAME, IPC_VARIABLE_LENGTH,
-    CARMEN_ERA_JOINT_STATE_MESSAGE_FMT);
-  carmen_test_ipc_exit(err, "Could not define message",
-    CARMEN_ERA_JOINT_STATE_MESSAGE_NAME);
+#include <config/config.h>
 
-  err = IPC_defineMsg(CARMEN_ERA_VELOCITY_STATE_MESSAGE_NAME, 
-    IPC_VARIABLE_LENGTH, CARMEN_ERA_VELOCITY_STATE_MESSAGE_FMT);
-  carmen_test_ipc_exit(err, "Could not define message",
-    CARMEN_ERA_VELOCITY_STATE_MESSAGE_NAME);
+/** \brief Read parameters from parameter daemon into a configuration object
+ */
+int carmen_era_params_read(
+  int argc, 
+  char *argv[],
+  config_p  can_config,
+  era_config_p era_config,
+  double* control_freq);
 
-  err = IPC_defineMsg(CARMEN_ERA_JOINT_CMD_MESSAGE_NAME, IPC_VARIABLE_LENGTH, 
-    CARMEN_ERA_JOINT_CMD_MESSAGE_FMT);
-  carmen_test_ipc_exit(err, "Could not define message",
-    CARMEN_ERA_JOINT_CMD_MESSAGE_NAME);
-
-  return 0;
+#ifdef __cplusplus
 }
+#endif
+
+#endif
+
+// @}

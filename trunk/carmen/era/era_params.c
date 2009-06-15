@@ -20,28 +20,31 @@
 
 #include <carmen/carmen.h>
 
-#include "era_ipc.h"
+#include <can_cpc.h>
 
-int carmen_era_ipc_initialize(int argc, char *argv[]) {
-  IPC_RETURN_TYPE err;
+#include "era_params.h"
 
-  carmen_ipc_initialize(argc, argv);
-  carmen_param_check_version(argv[0]);
+char* era_can_usb_dev;
 
-  err = IPC_defineMsg(CARMEN_ERA_JOINT_STATE_MESSAGE_NAME, IPC_VARIABLE_LENGTH,
-    CARMEN_ERA_JOINT_STATE_MESSAGE_FMT);
-  carmen_test_ipc_exit(err, "Could not define message",
-    CARMEN_ERA_JOINT_STATE_MESSAGE_NAME);
+double era_control_freq;
 
-  err = IPC_defineMsg(CARMEN_ERA_VELOCITY_STATE_MESSAGE_NAME, 
-    IPC_VARIABLE_LENGTH, CARMEN_ERA_VELOCITY_STATE_MESSAGE_FMT);
-  carmen_test_ipc_exit(err, "Could not define message",
-    CARMEN_ERA_VELOCITY_STATE_MESSAGE_NAME);
+int carmen_era_params_read(int argc, char *argv[], config_p can_config, 
+  era_config_p era_config, double* control_freq) {
+  int num_params;
+  
+  carmen_param_t param_list[] = {
+    {"era", "usb_dev", CARMEN_PARAM_STRING, &era_can_usb_dev, 0, NULL},
 
-  err = IPC_defineMsg(CARMEN_ERA_JOINT_CMD_MESSAGE_NAME, IPC_VARIABLE_LENGTH, 
-    CARMEN_ERA_JOINT_CMD_MESSAGE_FMT);
-  carmen_test_ipc_exit(err, "Could not define message",
-    CARMEN_ERA_JOINT_CMD_MESSAGE_NAME);
+    {"era", "control_freq", CARMEN_PARAM_DOUBLE, &era_control_freq, 0, NULL}
+  };
+  
+  num_params = sizeof(param_list)/sizeof(param_list[0]);
+  carmen_param_install_params(argc, argv, param_list, num_params);
 
-  return 0;
+  config_set_string(can_config, CAN_CPC_PARAMETER_DEVICE, era_can_usb_dev);
+
+  if (control_freq)
+    *control_freq = era_control_freq;
+
+  return num_params;
 }
