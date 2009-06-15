@@ -33,9 +33,9 @@ void carmen_era_unsubscribe_joint_state_message(carmen_handler_t handler) {
   carmen_unsubscribe_message(CARMEN_ERA_JOINT_STATE_MESSAGE_NAME, handler);
 }
 
-void carmen_era_publish_joint_state(double shoulder_yaw, double shoulder_roll,
-  double shoulder_pitch, double elbow_pitch, double tool_roll, double 
-  tool_opening, double timestamp) {
+void carmen_era_publish_joint_state_message(double shoulder_yaw, double 
+  shoulder_roll, double shoulder_pitch, double elbow_pitch, double tool_roll, 
+  double tool_opening, double timestamp) {
   carmen_era_joint_state_message message;
   IPC_RETURN_TYPE err;
 
@@ -67,7 +67,7 @@ void carmen_era_unsubscribe_velocity_state_message(carmen_handler_t handler) {
   carmen_unsubscribe_message(CARMEN_ERA_VELOCITY_STATE_MESSAGE_NAME, handler);
 }
 
-void carmen_era_publish_velocity_state(double shoulder_yaw, double 
+void carmen_era_publish_velocity_state_message(double shoulder_yaw, double 
   shoulder_roll, double shoulder_pitch, double elbow_pitch, double tool_roll,
   double tool_opening, double timestamp) {
   carmen_era_velocity_state_message message;
@@ -100,9 +100,9 @@ void carmen_era_unsubscribe_joint_cmd_message(carmen_handler_t handler) {
   carmen_unsubscribe_message(CARMEN_ERA_JOINT_CMD_MESSAGE_NAME, handler);
 }
 
-void carmen_era_publish_joint_cmd(double shoulder_yaw, double shoulder_roll,
-  double shoulder_pitch, double elbow_pitch, double tool_roll, double 
-  tool_opening, double vel_factor, double timestamp) {
+void carmen_era_publish_joint_cmd_message(double shoulder_yaw, double 
+  shoulder_roll, double shoulder_pitch, double elbow_pitch, double tool_roll, 
+  double tool_opening, double vel_factor, double timestamp) {
   carmen_era_joint_cmd_message message;
   IPC_RETURN_TYPE err;
 
@@ -121,4 +121,28 @@ void carmen_era_publish_joint_cmd(double shoulder_yaw, double shoulder_roll,
   err = IPC_publishData(CARMEN_ERA_JOINT_CMD_MESSAGE_NAME, &message);
   carmen_test_ipc_exit(err, "Could not publish",
     CARMEN_ERA_JOINT_CMD_MESSAGE_NAME);
+}
+
+
+void carmen_era_subscribe_stop_message(carmen_era_stop_message* stop, 
+  carmen_handler_t handler, carmen_subscribe_t subscribe_how) {
+  carmen_subscribe_message(CARMEN_ERA_STOP_MESSAGE_NAME, 
+    CARMEN_ERA_STOP_MESSAGE_FMT, stop, sizeof(carmen_era_stop_message), 
+    handler, subscribe_how);
+}
+
+void carmen_era_unsubscribe_stop_message(carmen_handler_t handler) {
+  carmen_unsubscribe_message(CARMEN_ERA_STOP_MESSAGE_NAME, handler);
+}
+
+void carmen_era_publish_stop_message(double timestamp) {
+  carmen_era_stop_message message;
+  IPC_RETURN_TYPE err;
+
+  message.timestamp = timestamp;
+  message.host = carmen_get_host();
+
+  err = IPC_publishData(CARMEN_ERA_STOP_MESSAGE_NAME, &message);
+  carmen_test_ipc_exit(err, "Could not publish",
+    CARMEN_ERA_STOP_MESSAGE_NAME);
 }

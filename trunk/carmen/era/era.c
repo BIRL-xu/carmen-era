@@ -34,6 +34,7 @@
 #include "era_interface.h"
 
 carmen_era_joint_cmd_message carmen_era_joint_cmd;
+carmen_era_stop_message carmen_era_stop;
 
 int carmen_era_quit = 0;
 
@@ -154,6 +155,15 @@ void carmen_era_joint_cmd_handle(void* joint_cmd) {
   thread_mutex_unlock(&carmen_era_mutex);
 }
 
+void carmen_era_stop_handle(void* joint_cmd) {
+  fprintf(stderr, ".");
+  fflush(stderr);
+
+  thread_mutex_lock(&carmen_era_mutex);
+  era_motors_position_profile_stop(&carmen_era_arm.motors);
+  thread_mutex_unlock(&carmen_era_mutex);
+}
+
 void carmen_era_wait_commands(era_arm_p arm, double freq) {
   thread_t sensor_thread;
 
@@ -163,10 +173,13 @@ void carmen_era_wait_commands(era_arm_p arm, double freq) {
   timer_sleep(1.0);
   carmen_era_subscribe_joint_cmd_message(&carmen_era_joint_cmd,
     carmen_era_joint_cmd_handle, CARMEN_SUBSCRIBE_LATEST);
+  carmen_era_subscribe_stop_message(&carmen_era_stop, carmen_era_stop_handle, 
+    CARMEN_SUBSCRIBE_LATEST);
 
   while (!carmen_era_quit) carmen_ipc_sleep(0.1);
   fprintf(stderr, "\n");
 
+  carmen_era_unsubscribe_stop_message(carmen_era_stop_handle);
   carmen_era_unsubscribe_joint_cmd_message(carmen_era_joint_cmd_handle);
   era_control_sensors_exit(&sensor_thread);
 }

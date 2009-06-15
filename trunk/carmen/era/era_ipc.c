@@ -43,5 +43,10 @@ int carmen_era_ipc_initialize(int argc, char *argv[]) {
   carmen_test_ipc_exit(err, "Could not define message",
     CARMEN_ERA_JOINT_CMD_MESSAGE_NAME);
 
+  err = IPC_defineMsg(CARMEN_ERA_STOP_MESSAGE_NAME, IPC_VARIABLE_LENGTH, 
+    CARMEN_ERA_STOP_MESSAGE_FMT);
+  carmen_test_ipc_exit(err, "Could not define message",
+    CARMEN_ERA_STOP_MESSAGE_NAME);
+
   return 0;
 }

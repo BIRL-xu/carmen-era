@@ -85,6 +85,16 @@ typedef struct {
 #define CARMEN_ERA_JOINT_CMD_MESSAGE_NAME "era_joint_cmd_message"
 #define CARMEN_ERA_JOINT_CMD_MESSAGE_FMT "{double,double,double,double,double,double,double,double,string}"
 
+/** \brief Stop message 
+  */
+typedef struct {
+  double timestamp;       //!< The message timestamp in [s].
+  char *host;             //!< The name of the sending host.
+} carmen_era_stop_message;
+
+#define CARMEN_ERA_STOP_MESSAGE_NAME "era_stop_message"
+#define CARMEN_ERA_STOP_MESSAGE_FMT "{double,string}"
+
 #ifdef __cplusplus
 }
 #endif

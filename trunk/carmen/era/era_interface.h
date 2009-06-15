@@ -50,7 +50,7 @@ void carmen_era_unsubscribe_joint_state_message(
 
 /** \brief Publish joint state messages
  */
-void carmen_era_publish_joint_state(
+void carmen_era_publish_joint_state_message(
   double shoulder_yaw,
   double shoulder_roll,
   double shoulder_pitch,
@@ -74,7 +74,7 @@ void carmen_era_unsubscribe_velocity_state_message(
 
 /** \brief Publish velocity state messages
  */
-void carmen_era_publish_velocity_state(
+void carmen_era_publish_velocity_state_message(
   double shoulder_yaw,
   double shoulder_roll,
   double shoulder_pitch,
@@ -98,7 +98,7 @@ void carmen_era_unsubscribe_joint_cmd_message(
 
 /** \brief Publish joint command messages
  */
-void carmen_era_publish_joint_cmd(
+void carmen_era_publish_joint_cmd_message(
   double shoulder_yaw,
   double shoulder_roll,
   double shoulder_pitch,
@@ -106,6 +106,24 @@ void carmen_era_publish_joint_cmd(
   double tool_roll,
   double tool_opening,
   double vel_factor,
+  double timestamp);
+
+
+/** \brief Subscribes to stop messages
+ */
+void carmen_era_subscribe_stop_message(
+  carmen_era_joint_cmd_message* joint_cmd,
+  carmen_handler_t handler,
+  carmen_subscribe_t subscribe_how);
+
+/** \brief Unsubscribes from stop messages
+ */
+void carmen_era_unsubscribe_stop_message(
+  carmen_handler_t handler);
+
+/** \brief Publish stop messages
+ */
+void carmen_era_publish_stop_message(
   double timestamp);
 
 #ifdef __cplusplus
