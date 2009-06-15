@@ -32,8 +32,6 @@
 extern "C" {
 #endif
 
-#include <base/era.h>
-
 #include <carmen/carmen.h>
 
 #include "era_messages.h"
@@ -53,7 +51,12 @@ void carmen_era_unsubscribe_joint_state_message(
 /** \brief Publish joint state messages
  */
 void carmen_era_publish_joint_state(
-  era_joint_state_p joint_state,
+  double shoulder_yaw,
+  double shoulder_roll,
+  double shoulder_pitch,
+  double elbow_pitch,
+  double tool_roll,
+  double tool_opening,
   double timestamp);
 
 
@@ -72,7 +75,12 @@ void carmen_era_unsubscribe_velocity_state_message(
 /** \brief Publish velocity state messages
  */
 void carmen_era_publish_velocity_state(
-  era_velocity_state_p vel_state,
+  double shoulder_yaw,
+  double shoulder_roll,
+  double shoulder_pitch,
+  double elbow_pitch,
+  double tool_roll,
+  double tool_opening,
   double timestamp);
 
 
@@ -91,7 +99,12 @@ void carmen_era_unsubscribe_joint_cmd_message(
 /** \brief Publish joint command messages
  */
 void carmen_era_publish_joint_cmd(
-  era_joint_state_p joint_state,
+  double shoulder_yaw,
+  double shoulder_roll,
+  double shoulder_pitch,
+  double elbow_pitch,
+  double tool_roll,
+  double tool_opening,
   double vel_factor,
   double timestamp);
 

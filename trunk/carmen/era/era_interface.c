@@ -33,17 +33,18 @@ void carmen_era_unsubscribe_joint_state_message(carmen_handler_t handler) {
   carmen_unsubscribe_message(CARMEN_ERA_JOINT_STATE_MESSAGE_NAME, handler);
 }
 
-void carmen_era_publish_joint_state(era_joint_state_p joint_state, double 
-  timestamp) {
+void carmen_era_publish_joint_state(double shoulder_yaw, double shoulder_roll,
+  double shoulder_pitch, double elbow_pitch, double tool_roll, double 
+  tool_opening, double timestamp) {
   carmen_era_joint_state_message message;
   IPC_RETURN_TYPE err;
 
-  message.shoulder_yaw = joint_state->shoulder_yaw;
-  message.shoulder_roll = joint_state->shoulder_roll;
-  message.shoulder_pitch = joint_state->shoulder_pitch;
-  message.elbow_pitch = joint_state->elbow_pitch;
-  message.tool_roll = joint_state->tool_roll;
-  message.tool_opening = joint_state->tool_opening;
+  message.shoulder_yaw = shoulder_yaw;
+  message.shoulder_roll = shoulder_roll;
+  message.shoulder_pitch = shoulder_pitch;
+  message.elbow_pitch = elbow_pitch;
+  message.tool_roll = tool_roll;
+  message.tool_opening = tool_opening;
 
   message.timestamp = timestamp;
   message.host = carmen_get_host();
@@ -66,17 +67,18 @@ void carmen_era_unsubscribe_velocity_state_message(carmen_handler_t handler) {
   carmen_unsubscribe_message(CARMEN_ERA_VELOCITY_STATE_MESSAGE_NAME, handler);
 }
 
-void carmen_era_publish_velocity_state(era_velocity_state_p vel_state, double 
-  timestamp) {
+void carmen_era_publish_velocity_state(double shoulder_yaw, double 
+  shoulder_roll, double shoulder_pitch, double elbow_pitch, double tool_roll,
+  double tool_opening, double timestamp) {
   carmen_era_velocity_state_message message;
   IPC_RETURN_TYPE err;
 
-  message.shoulder_yaw = vel_state->shoulder_yaw;
-  message.shoulder_roll = vel_state->shoulder_roll;
-  message.shoulder_pitch = vel_state->shoulder_pitch;
-  message.elbow_pitch = vel_state->elbow_pitch;
-  message.tool_roll = vel_state->tool_roll;
-  message.tool_opening = vel_state->tool_opening;
+  message.shoulder_yaw = shoulder_yaw;
+  message.shoulder_roll = shoulder_roll;
+  message.shoulder_pitch = shoulder_pitch;
+  message.elbow_pitch = elbow_pitch;
+  message.tool_roll = tool_roll;
+  message.tool_opening = tool_opening;
 
   message.timestamp = timestamp;
   message.host = carmen_get_host();
@@ -98,17 +100,18 @@ void carmen_era_unsubscribe_joint_cmd_message(carmen_handler_t handler) {
   carmen_unsubscribe_message(CARMEN_ERA_JOINT_CMD_MESSAGE_NAME, handler);
 }
 
-void carmen_era_publish_joint_cmd(era_joint_state_p joint_state, double
-  vel_factor, double timestamp) {
+void carmen_era_publish_joint_cmd(double shoulder_yaw, double shoulder_roll,
+  double shoulder_pitch, double elbow_pitch, double tool_roll, double 
+  tool_opening, double vel_factor, double timestamp) {
   carmen_era_joint_cmd_message message;
   IPC_RETURN_TYPE err;
 
-  message.shoulder_yaw = joint_state->shoulder_yaw;
-  message.shoulder_roll = joint_state->shoulder_roll;
-  message.shoulder_pitch = joint_state->shoulder_pitch;
-  message.elbow_pitch = joint_state->elbow_pitch;
-  message.tool_roll = joint_state->tool_roll;
-  message.tool_opening = joint_state->tool_opening;
+  message.shoulder_yaw = shoulder_yaw;
+  message.shoulder_roll = shoulder_roll;
+  message.shoulder_pitch = shoulder_pitch;
+  message.elbow_pitch = elbow_pitch;
+  message.tool_roll = tool_roll;
+  message.tool_opening = tool_opening;
 
   message.vel_factor = vel_factor;
 
