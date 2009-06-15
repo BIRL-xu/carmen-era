@@ -101,11 +101,11 @@ void carmen_era_sensors_handle(era_joint_state_p joint_state,
   era_velocity_state_p vel_state, double freq __attribute__ ((unused))) {
   double timestamp = carmen_get_time();
 
-  carmen_era_publish_joint_state(joint_state->shoulder_yaw, 
+  carmen_era_publish_joint_state_message(joint_state->shoulder_yaw, 
     joint_state->shoulder_roll, joint_state->shoulder_pitch, 
     joint_state->elbow_pitch, joint_state->tool_roll, 
     joint_state->tool_opening, timestamp);
-  carmen_era_publish_velocity_state(vel_state->shoulder_yaw, 
+  carmen_era_publish_velocity_state_message(vel_state->shoulder_yaw, 
     vel_state->shoulder_roll, vel_state->shoulder_pitch, 
     vel_state->elbow_pitch, vel_state->tool_roll, vel_state->tool_opening, 
     timestamp);

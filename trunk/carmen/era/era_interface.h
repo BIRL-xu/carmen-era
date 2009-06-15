@@ -112,7 +112,7 @@ void carmen_era_publish_joint_cmd_message(
 /** \brief Subscribes to stop messages
  */
 void carmen_era_subscribe_stop_message(
-  carmen_era_joint_cmd_message* joint_cmd,
+  carmen_era_stop_message* stop,
   carmen_handler_t handler,
   carmen_subscribe_t subscribe_how);
 
