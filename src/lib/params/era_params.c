@@ -20,7 +20,7 @@
 
 #include <carmen/carmen.h>
 
-#include <can_cpc.h>
+#include <libcan/can_cpc.h>
 
 #include "era_params.h"
 

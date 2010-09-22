@@ -20,14 +20,14 @@
 
 #include <signal.h>
 
-#include <timer.h>
-#include <thread.h>
+#include <tulibs/timer.h>
+#include <tulibs/thread.h>
 
-#include <base/era.h>
-#include <motors/home.h>
-#include <dynamics/dynamics.h>
-#include <motors/position_profile.h>
-#include <control/sensors.h>
+#include <era-libs/era.h>
+#include <era-libs/motors/home.h>
+#include <era-libs/dynamics/dynamics.h>
+#include <era-libs/motors/position_profile.h>
+#include <era-libs/control/sensors.h>
 
 #include "era_params.h"
 #include "era_ipc.h"

@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-#include <config/config.h>
+#include <era-libs/config/config.h>
 
 /** \brief Read parameters from parameter daemon into a configuration object
  */
