@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-#include <carmen/carmen.h>
+#include <carmen/global.h>
 
 #include "era_messages.h"
 

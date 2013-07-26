@@ -18,7 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <carmen/carmen.h>
+#include <carmen/global.h>
+#include <carmen/param_interface.h>
 
 #include <libcan/can_cpc.h>
 

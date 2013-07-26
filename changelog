@@ -1,10 +1,17 @@
-carmen-era (0.1-21) unstable; urgency=low
+carmen-era (0.1-20) unstable; urgency=low
+
+  * Added pkg-config file
+  * Release distributions
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Fri, 26 Jul 2013 15:41:00 +0100
+
+carmen-era (0.1-19) unstable; urgency=low
 
   * Added changelog
 
  -- Ralf Kaestner <ralf.kaestner@gmail.com>  Fri, 26 Jul 2013 14:32:00 +0100
 
-carmen-era (0.1-20) unstable; urgency=low
+carmen-era (0.1-18) unstable; urgency=low
 
   * First revision of ReMake port
 
