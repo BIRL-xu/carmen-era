@@ -1,0 +1,127 @@
+carmen-era (0.1-21) unstable; urgency=low
+
+  * Added changelog
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Fri, 26 Jul 2013 14:32:00 +0100
+
+carmen-era (0.1-20) unstable; urgency=low
+
+  * First revision of ReMake port
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 22 Sep 2010 07:05:03 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * Fixed some bugs in the CARMEN ERA stop message
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Mon, 15 Jun 2009 13:06:58 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * Added stop message to ERA CARMEN interface
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Mon, 15 Jun 2009 13:01:18 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * CARMEN interface for the arm accepts position commands
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Mon, 15 Jun 2009 12:40:04 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * Simplified CARMEN message interface to not depend on the ERA
+    libraries
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Mon, 15 Jun 2009 10:03:31 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * Preliminary CARMEN interface for the arm
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Mon, 15 Jun 2009 09:56:50 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * CARMEN ERA module under construction
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Sun, 14 Jun 2009 21:13:23 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * Further CARMEN cleanups in trunk
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Sun, 14 Jun 2009 18:48:45 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * CARMEN cleanups in trunk
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Sun, 14 Jun 2009 18:48:18 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * Simple arm motion using linear velocities
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Mon, 25 May 2009 18:28:59 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * Acceleration state and limit testing
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Sun, 24 May 2009 18:13:21 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * arm homing work for single joint, EPOS library modifications
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Thu, 14 May 2009 18:53:01 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+    * Status at Markus presentation.
+
+ -- Dizan Vasquez <dichodaemon@gmail.com>  Thu, 29 May 2008 13:59:06 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+    * Added complete tests test scripts for the robot arms.
+
+ -- Dizan Vasquez <dichodaemon@gmail.com>  Wed, 28 May 2008 23:27:19 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+    * First import of python bindings.
+
+ -- Dizan Vasquez <dichodaemon@gmail.com>  Wed, 28 May 2008 20:54:02 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+    * Added includes for carmen in interfaces.
+
+ -- Dizan Vasquez <dichodaemon@gmail.com>  Wed, 28 May 2008 20:53:11 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+    * Created directory for python bindings.
+
+ -- Dizan Vasquez <dichodaemon@gmail.com>  Wed, 28 May 2008 19:36:46 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+    * Implemented carmen interfaces.
+    * Adapted to CMake structure.
+
+ -- Dizan Vasquez <dichodaemon@gmail.com>  Wed, 28 May 2008 19:29:25 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * CARMEN messages defined
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 28 May 2008 18:37:27 +0200
+
+carmen-era (0.1) unstable; urgency=low
+
+  * created libera-kinematics for kinematics code
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Mon, 05 May 2008 19:15:22 +0200
